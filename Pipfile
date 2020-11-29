@@ -1,0 +1,17 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+pylint = "*"
+
+[packages]
+boto3 = "==1.16.25"
+
+[requires]
+python_version = "3.8.5"
+
+[scripts]
+tests = "python -m unittest discover tests"
+lint = "pylint sentiment"

@@ -1,0 +1,28 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Ignore PyCharm, VSCode - add your IDE files here!
+/.idea
+**/.idea/
+/.vscode
+
+# Ignore log files
+**/*.log
+
+# Ignore dest/
+/dest/
+/requirements.txt
+
+# Ignore OSX specific stuff
+**/.DS_Store
+
+# Local temp directory for hacking around!
+/tmp
+
+# .version file is generated on CI and should not be tracked in Git!
+# it is just the commit sha of the current HEAD :)
+.version
+/.coverage
+/htmlcov/
