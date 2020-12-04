@@ -8,6 +8,9 @@ pylint = "*"
 
 [packages]
 boto3 = "==1.16.25"
+nltk = "==3.5"
+scikit-learn = "==0.23.2"
+scipy = "==1.5.4"
 
 [requires]
 python_version = "3.8.5"
