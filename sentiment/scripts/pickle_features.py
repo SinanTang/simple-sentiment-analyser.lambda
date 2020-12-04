@@ -8,7 +8,7 @@ from sentiment.services.preprocess import get_word_freq_dict, find_features
 from sentiment.utils import get_project_root
 
 
-# TODO add data preprocessing
+# TODO add text preprocessing steps
 def get_labeled_sentiment_dataset(train_data_dir=utils.get_training_data_path()):
     """
     Label training data with sentiment label, 'pos' or 'neg'.

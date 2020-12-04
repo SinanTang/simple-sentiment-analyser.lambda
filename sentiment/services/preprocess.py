@@ -1,23 +1,30 @@
 """Contains functionalities to preprocess and clean data before using"""
 import os
-import re
 
+import regex
 from nltk import FreqDist
 from nltk.tokenize import word_tokenize
-from nltk.corpus import stopwords
 
+from sentiment import utils
 from sentiment.services.features import get_word_features
 
 
 def remove_stop_words(tokens):
-    return [t for t in tokens if not t in stopwords]
+    """
+    Removes stop words in token list.
+    Langauge setting default to `english`.
+    :param tokens: list of tokens
+    :return: list of tokens
+    """
+    stop_words = utils.load_stop_word_list('english')
+    return [t for t in tokens if not t in stop_words]
 
 
 def remove_punctuations(text):
-    return re.sub(r'[^(a-zA-Z)\s]', '', text)
+    p = regex.compile(r'\p{P}+')
+    return p.sub(' ', text)
 
 
-# TODO add Text cleaning steps
 def get_word_freq_dict(data_path):
     """
     Returns a word frequency dict (Bag of Words) using the text data provided.
@@ -26,13 +33,15 @@ def get_word_freq_dict(data_path):
     :return: nltk FreqDist obj, e.g.
     FreqDist({'good': 13703, 'bad': 8461, 'great': 8297, ...}]
     """
-    tokens = []
+    clean_tokens = []
     for f in os.listdir(data_path):
         if f.endswith('.txt'):
             fh = open(os.path.join(data_path, f), 'r').read()
-            tokens.extend([t.lower() for t in word_tokenize(fh)])
+            no_punctuations = remove_punctuations(fh)
+            tokens = word_tokenize(no_punctuations)
+            clean_tokens.extend([t.lower() for t in remove_stop_words(tokens)])
 
-    return FreqDist(tokens)
+    return FreqDist(clean_tokens)
 
 
 def find_features(text):
