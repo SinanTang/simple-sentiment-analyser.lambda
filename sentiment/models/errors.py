@@ -1,0 +1,2 @@
+class InvalidEventError(Exception):
+    pass

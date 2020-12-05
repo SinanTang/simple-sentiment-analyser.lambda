@@ -1,4 +1,11 @@
-import json
+import logging
+
+from sentiment.models import requests
+from sentiment.models.responses import build_response_body
+from sentiment.services.predict import predict_sentiment
+
+LOGGER = logging.getLogger('sentiment.lambda.sentiment_analyser')
+LOGGER.setLevel(logging.INFO)
 
 
 def handler(event, _):
@@ -12,6 +19,17 @@ def handler(event, _):
     :return: A json string containing an HTTP statusCode, headers and a body
             OR errors.
     """
-    return dict(statusCode=200,
-                headers={},
-                body=json.dumps(event))
+    try:
+        LOGGER.info("Received request: {}".format(event))
+        text = requests.validate_request(event)
+        sentiment_prediction, confidence = predict_sentiment(text)
+
+        return dict(statusCode=200,
+                    headers={},
+                    body=build_response_body(sentiment_prediction,
+                                             confidence))
+
+    except Exception as e:
+        return dict(statusCode=500,
+                    headers={},
+                    body={'exception': '{}'.format(e)})
