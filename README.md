@@ -1,7 +1,7 @@
 # simple-sentiment-analyser.lambda
 A simple Python application to detect text sentiment. 
 
-This repo  is for educational purposes. It contains source code to be deployed as a AWS lambda function.
+This repo is for educational purposes. It contains source code to be deployed as a AWS lambda function. The project was written for my _Learn Python with NLP Projects_ workshop series in 2020 (see [slides](https://sinantang.github.io/natural%20language%20processing/2020/12/04/python-workshop-two/)).
 
 ### Development
 
